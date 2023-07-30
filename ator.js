@@ -15,7 +15,9 @@ function movimentaAtor() {
   }
 
   if (keyIsDown(DOWN_ARROW)) {
-    yAtor += 3;
+    if (podeSeMover()) {
+      yAtor += 3;
+    }
   }
 }
 
@@ -33,6 +35,8 @@ function verificaColisao() {
     );
 
     if (colisao) {
+      somDaColisao.play();
+      if (pontosMaiorQueZero()) meusPontos--;
       voltaAtorPosicaoInicial();
     }
   }
@@ -51,7 +55,16 @@ function incluiPontos() {
 
 function marcaPonto() {
   if (yAtor < 15) {
+    somDoPonto.play();
     meusPontos++;
     voltaAtorPosicaoInicial();
   }
+}
+
+function pontosMaiorQueZero() {
+  return meusPontos > 0;
+}
+
+function podeSeMover() {
+  return yAtor < 366;
 }
